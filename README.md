@@ -11,8 +11,8 @@ A DNS client written in C from scratch. No libraries, just raw UDP sockets, manu
 
 ---
 
-## Demo
 
+https://github.com/user-attachments/assets/53e94a35-c42e-4363-9865-e6f7412397af
 
 
 ---
