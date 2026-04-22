@@ -37,26 +37,25 @@ typedef struct {
 } dns_message;
 
 
-
 // Declaration for all the helpers
 
-// Send to a google 8.8.8.8 DNS server for testing
-int dns_send(const uint8_t *buf, int len);
+// Send the raw DNS packet to the given server. Returns the open socket fd.
+int dns_send(const uint8_t *buf, int len, const char *server_ip, uint16_t port);
 
 // Receive Raw bytes as the answer containing the response, resolved ip other details etc...
 int dns_recv(int sock, uint8_t *reply, size_t reply_len);
 
-// the whole query builder function used for sending over to dns
-int dns_query(uint8_t *buf, size_t buflen, const char *domain);
+// Build the query, send to dns_server:port, receive the response and parse the IP into out_ip.
+// Returns 1 on success, -1 on failure.
+int dns_query(const char *domain, const char *dns_server, uint16_t port, char *out_ip);
 
 // Encode the domain name to wire format to be send via the udp
 int dns_encode_name(const char *name,uint8_t *out);
 
 // Parse the name decode the name back to humar readable form
-int dns_parse_name(const uint8_t *buf, size_t buflen, int offset, char *out, size_t outlen);
+int dns_parse_name(const uint8_t *buf, size_t buflen, int offset, char *out);
 
-// Parse the entire response, extarct the ip and the answer details and print them
-int dns_parse_response(const uint8_t *buf, size_t buflen, char *out, size_t outlen);
+// Parse the entire response, extract the ip and the answer details and print them
+int dns_parse_response(const uint8_t *buf, size_t buflen, char *out, uint32_t *out_ttl);
 
 // caching the resolved ip with a ttl so everytime a user sends a query if a cache hits the ip will be picked and sent directly from here avoiding the requests
-

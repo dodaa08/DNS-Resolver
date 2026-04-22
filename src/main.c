@@ -1,40 +1,25 @@
 #include <stdio.h>
 #include "dns.h"
-#include <unistd.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[]){
 
     if (argc < 2) {
-        printf("usage: ./dns-resolver <domain>\n");
+        printf("usage: ./dns-resolver <domain> [dns-server] [port]\n");
         return 1;
     }
 
-    const char *domain = argv[1];
+    const char *domain   = argv[1];
+    const char *serverIp = (argc >= 3) ? argv[2] : "8.8.8.8";
+    uint16_t    port     = (argc >= 4) ? (uint16_t)atoi(argv[3]) : 53;
 
-    uint8_t buf[512];
-    uint8_t reply[512];
-
-    int len = dns_query(buf, sizeof(buf), domain);
-    int sock = dns_send(buf, len);
-    int received = dns_recv(sock, reply, sizeof(reply));
-    close(sock);
-
-    printf("received %d bytes:\n", received);
-    for(int i = 0; i < received; i++){
-        printf("%02x", reply[i]);
-        if((i+1)%8==0){
-            printf("\n");
-        }
-    };
-
-    // use decode these bytes and get a real human readable domain ip address for the answer
     char ip[64];
-    if(dns_parse_response(reply, received, ip, sizeof(ip)) == 1){
-        printf("\n IP Address: %s\n", ip);
+    if (dns_query(domain, serverIp, port, ip) == 1) {
+        printf("IP Address: %s\n", ip);
+    } else {
+        printf("Could not resolve %s\n", domain);
+        return 1;
     }
-    else{
-        printf("\nCould not find IP address.\n");
-    };
 
     return 0;
 }
