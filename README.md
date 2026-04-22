@@ -6,7 +6,8 @@ A DNS client written in C from scratch. No libraries, just raw UDP sockets, manu
 
 ## How it works
 
-<img width="1056" height="729" alt="image" src="https://github.com/user-attachments/assets/e5e42c58-0816-423d-8d61-b19788cd734f" />
+<img width="1056" height="729" alt="Screenshot From 2026-04-22 16-32-20" src="https://github.com/user-attachments/assets/a6854816-dc87-44a9-9575-f9c64cb9dd89" />
+
 
 ---
 
