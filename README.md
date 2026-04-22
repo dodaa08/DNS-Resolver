@@ -4,15 +4,15 @@ A DNS client written in C from scratch. No libraries, just raw UDP sockets, manu
 
 ---
 
-## System Design
+## How it works
 
-<!-- Add system design diagram here -->
+<img width="1056" height="729" alt="image" src="https://github.com/user-attachments/assets/e5e42c58-0816-423d-8d61-b19788cd734f" />
 
 ---
 
 ## Demo
 
-<!-- Add demo video here -->
+
 
 ---
 
