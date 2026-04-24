@@ -216,7 +216,7 @@ int dns_parse_response(const uint8_t *buf, size_t buflen, char *out, uint32_t *o
 
         if(type == 1 && rdlen == 4){
             uint32_t ttl;
-            memcpy(&ttl, buf + offset - 6, 4);  // TTL is 4 bytes before rdlength
+            memcpy(&ttl, buf + offset - 6, 4);
             *out_ttl = ntohl(ttl);
             sprintf(out, "%d.%d.%d.%d", buf[offset], buf[offset+1], buf[offset+2], buf[offset+3]);
             return 1;
@@ -227,8 +227,3 @@ int dns_parse_response(const uint8_t *buf, size_t buflen, char *out, uint32_t *o
 
     return -1;
 }
-
-
-// Implement the caching mechanism
-
-// Error handling improve, code quality improve before sharing

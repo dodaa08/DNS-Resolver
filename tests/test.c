@@ -19,15 +19,15 @@ void test_cache() {
 
     char out[64];
 
-    // Miss on empty cache
+   
     ASSERT("cache miss on empty cache", cache_get("google.com", out) == 0);
 
-    // Store an entry with a 300s TTL and retrieve it
+   
     cache_set("google.com", "1.2.3.4", 300);
     ASSERT("cache hit after set",      cache_get("google.com", out) == 1);
     ASSERT("cache returns correct ip", strcmp(out, "1.2.3.4") == 0);
 
-    // Different domain should still miss
+    
     ASSERT("cache miss for different domain", cache_get("github.com", out) == 0);
 }
 
@@ -38,12 +38,12 @@ void test_dns_resolution() {
 
     char ip[64];
 
-    // Valid domain — default server 8.8.8.8
+   
     int result = dns_query("google.com", "8.8.8.8", 53, ip);
     ASSERT("resolves google.com", result == 1);
     ASSERT("ip is non-empty",     strlen(ip) > 0);
 
-    // Same domain second time — should hit cache
+    
     char ip2[64];
     result = dns_query("google.com", "8.8.8.8", 53, ip2);
     ASSERT("second query succeeds (cache hit)", result == 1);
@@ -57,11 +57,10 @@ void test_error_handling() {
 
     char ip[64];
 
-    // Invalid server IP — use a domain not previously cached
+   
     int result = dns_query("example.org", "notAnIp", 53, ip);
     ASSERT("invalid server ip returns -1", result == -1);
 
-    // Non-existent domain
     result = dns_query("thisdoesnotexist99999abc.com", "8.8.8.8", 53, ip);
     ASSERT("non-existent domain returns -1", result == -1);
 }

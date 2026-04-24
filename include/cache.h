@@ -3,10 +3,10 @@
 #include <stdint.h>
 
 typedef struct {
-    char     domain[256];  // "google.com"
-    char     ip[64];       // "142.250.182.142"
-    time_t   expiry;       // unix timestamp when this entry expires
-    int      valid;        // 1 = slot in use, 0 = empty
+    char     domain[256];
+    char     ip[64];      
+    time_t   expiry;       
+    int      valid;       
 } dns_cache_entry;
 
 int cache_get(const char *domain, char *out_ip);

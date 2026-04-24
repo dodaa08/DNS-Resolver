@@ -57,5 +57,3 @@ int dns_parse_name(const uint8_t *buf, size_t buflen, int offset, char *out);
 
 // Parse the entire response, extract the ip and the answer details and print them
 int dns_parse_response(const uint8_t *buf, size_t buflen, char *out, uint32_t *out_ttl);
-
-// caching the resolved ip with a ttl so everytime a user sends a query if a cache hits the ip will be picked and sent directly from here avoiding the requests
