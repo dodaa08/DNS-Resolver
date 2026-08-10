@@ -79,3 +79,4 @@ make test
 ```
 
 Tests cover cache hit/miss, TTL expiry logic, error paths (invalid IP, NXDOMAIN), and end-to-end resolution.
+# Test change for PR
